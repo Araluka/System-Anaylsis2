@@ -1,0 +1,233 @@
+body {
+    margin: 0;
+    font-family: 'Anton', sans-serif; /* เปลี่ยนฟอนต์ */
+}
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-top {
+    background-color: white;
+    padding: 10px 20px; /* เพิ่ม padding */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.header-top .shop-name {
+    font-size: 32px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    font-weight: bold;
+    color: #000000;
+}
+.header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* จัดกลางแนวนอน */
+    background-color: #f8c6d4;
+    padding: 10px 20px; /* เพิ่ม padding */
+}
+.header-bottom .home-icon {
+    width: 36px; /* ขนาดไอคอนใหญ่ขึ้น */
+    height: 36px;
+    background-image: url('image/house.png'); /* เปลี่ยน URL ตามที่คุณมี */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 20px; /* เพิ่มระยะห่างจากกล่องค้นหา */
+    position: absolute; /* ทำให้สามารถจัดการตำแหน่งได้ */
+    left: 20px; /* ให้ไปอยู่ที่มุมซ้ายของคอนเทนเนอร์ */
+}
+.header-bottom .icon-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* เพิ่มระยะห่างระหว่างไอคอน */
+    position: absolute;
+    right: 70px; /* ให้ไปอยู่ถัดจากไอคอนบ้าน */
+}
+
+.header-bottom .icon-container a {
+    display: flex;
+    align-items: right;
+}
+
+.header-bottom .icon-container img {
+    width: 36px; /* ขนาดของไอคอนผู้ใช้และตะกร้า */
+    height: 36px;
+}
+.header-bottom .search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center; /* จัดกลางในคอนเทนเนอร์ */
+}
+
+.header-bottom input[type="text"] {
+    padding: 15px; /* เพิ่ม padding */
+    border: 2px solid #ddd; /* เพิ่มความหนาของเส้นขอบ */
+    border-radius: 50px; /* เพิ่มความโค้งมนของมุม */
+    width: 500px; /* ขยายขนาดช่องค้นหา */
+}
+
+.header-bottom .search-button {
+    background-color: transparent; /* ไม่ต้องการพื้นหลัง */
+    border: none;
+    cursor: pointer;
+    padding: 10; /* ไม่มี padding */
+    display: flex; /* ใช้ flex เพื่อจัดตำแหน่ง */
+    align-items: center; /* จัดกลางแนวตั้ง */
+}
+
+.header-bottom .search-button img {
+    width: 24px; /* ขนาดของไอคอนค้นหา */
+    height: 24px;
+}
+.nav {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0; /* เพิ่ม padding */
+}
+
+.nav .nav-item {
+    position: relative;
+    margin: 0 50px; /* เพิ่มระยะห่างระหว่างเมนู */
+}
+
+.nav .nav-item a {
+    font-size: 24px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    font-weight: bold; /* ตัวหนา */
+    color: black; /* สีตัวอักษรดำ */
+    text-decoration: none; /* ไม่มีเส้นขีดด้านใต้ */
+}
+
+.nav .nav-item:hover .dropdown {
+    display: block;
+}
+
+.nav .nav-item .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* เพิ่ม padding */
+    border-radius: 8px; /* เพิ่มความโค้งมนของมุม */
+}
+
+.nav .nav-item .dropdown a {
+    display: block;
+    padding: 10px 20px; /* เพิ่ม padding */
+    color: #333;
+    text-decoration: none;
+    font-size: 20px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+}
+
+.nav .nav-item .dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px; /* เพิ่ม padding */
+    font-weight: bold;
+    margin: 0 10%; /* เพิ่มระยะห่างจากขอบของหน้าต่าง */
+}
+
+.main-content h1 {
+    font-size: 48px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+    margin: 0;
+    padding: 20px 0; /* เพิ่ม padding ด้านบนและล่าง */
+    align-self: flex-start; /* จัดตำแหน่งชิดมุมซ้าย */
+}
+
+.promo-box {
+    background-color: #F6F6F6;
+    border-radius: 12px; /* ความโค้งมนของมุม */
+    padding: 40px; /* เพิ่ม padding */
+    width: 100%; /* ให้มีขนาดเต็มความกว้างของคอนเทนเนอร์ */
+    max-width: 1200px; /* กำหนดความกว้างสูงสุด */
+    margin: 0 auto; /* จัดกลาง */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ปรับให้ชิดซ้าย */
+}
+
+.promo-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* ปรับให้ลูกของ .promo-details ชิดซ้าย */
+}
+
+
+.promo-title {
+    display: flex;
+    justify-content:center;
+} 
+
+.jelly {
+    font-size: 500px; /* ขนาดฟอนต์ใหญ่ */
+    font-weight: bold; /* ตัวหนา */
+    margin: 0; /* ลบการเว้นระยะรอบตัวอักษร */
+    padding: 0; /* ลบ padding */
+}
+
+.description {
+    font-size: 20px; /* ขนาดฟอนต์เล็กกว่า */
+    margin: 0; /* ลบการเว้นระยะรอบพารากราฟ */
+    padding: 0; /* ลบ padding */
+}
+
+.promo-image {
+    margin-bottom: 20px; /* เพิ่มระยะห่างจากข้อความ */
+}
+
+.promo-image img {
+    width: 100px; /* ขนาดของรูปภาพ */
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px; /* ความโค้งมนของมุม */
+}
+
+.promo-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px; /* ขนาดตัวอักษร */
+    margin-bottom: 10px; /* เพิ่มระยะห่างด้านล่าง */
+}
+
+.info-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px; /* เพิ่มระยะห่างด้านล่าง */
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-box {
+    background-color: #E0E0E0; /* สีเทาอ่อน */
+    border-radius: 8px; /* ความโค้งมนของมุม */
+    padding: 10px 20px; /* เพิ่ม padding */
+    font-size: 24px; /* ขนาดตัวอักษร */
+}
+
+.shipping-info p {
+    font-size: 14px; /* ขนาดตัวอักษร */
+    margin: 5px 0; /* เพิ่มระยะห่าง */
+}
+
+.shipping-cost {
+    font-size: 24px; /* ขนาดตัวอักษร */
+    font-weight: bold;
+}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrderComplete</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .promo-box {
+            background-color: #F6F6F6;
+            border-radius: 12px; /* เพิ่มความโค้งมนของมุม */
+            padding: 40px; /* เพิ่ม padding */
+            width: 80%;
+            text-align: center;
+            margin-bottom: 40px; /* เพิ่มระยะห่าง */
+        }
+
+        .promo-box h1 {
+            font-size: 64px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+            margin: 0;
+        }
+
+        .promo-box p {
+            font-size: 20px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+            margin: 20px 0 0; /* เพิ่มระยะห่าง */
+        }
+
+        .product-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* เพิ่มระยะห่างระหว่างรูปภาพ */
+        }
+
+        .product-gallery .product {
+            text-align: center;
+        }
+
+        .product-gallery img {
+            width: 350px; /* ขนาดภาพใหญ่ขึ้น */
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px; /* เพิ่มความโค้งมนของมุม */
+        }
+
+        .product-gallery .product p {
+            margin: 10px 0 0;
+            font-size: 24px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+            font-weight: bold; /* ตัวหนา */
+            color: black; /* สีตัวอักษรดำ */
+            text-decoration: none; /* ไม่มีเส้นขีดด้านใต้ */
+        }
+
+        main {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 80vh; /* ให้ main มีความสูง 80% ของหน้าจอ */
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product img {
+            max-width: 500px;
+            margin-right: 20px;
+        }
+
+        .product-details {
+            text-align: left;
+        }
+
+        .product-details img {
+            max-width: 100px;
+            margin-right: 20px;
+        }
+
+        .product-details a {
+            margin: 0 0 10px;
+            font-size: 48px;
+            font-weight: bold;
+           
+            font-family: 'Anton', sans-serif;
+        }
+
+        .product-details h2 {
+            margin-right: 20px;
+            font-size: 48px;
+            font-weight: bold;
+            text-transform: lowercase;
+            font-family: 'Anton', sans-serif;
+        }
+
+        .product-details p {
+            margin: 0 0 20px;
+            font-size: 20px;
+            font-family: 'Anton', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="shop-name">Second-Hand Figure Shop</div>
+        </div>
+        <div class="header-bottom">
+            <div class="home-icon"></div>
+            <div class="icon-container">
+                <a href="#" class="user-icon">
+                    <img src="image/people.png" alt="User"> <!-- เปลี่ยน URL ตามที่คุณมี -->
+                </a>
+                <a href="#" class="cart-icon">
+                    <img src="image/cart.png" alt="Cart"> <!-- เปลี่ยน URL ตามที่คุณมี -->
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="ค้นหาสินค้า...">
+                <button class="search-button">
+                    <img src="image/search.png" alt="Search"> <!-- เปลี่ยน URL ตามที่คุณมี -->
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="nav">
+        <div class="nav-item">
+            <a href="#"><h1>Your Order<h1></a>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="promo-box">
+            <section class="product">
+                <img src="image/jelly.png" alt="Mega Space Molly 100% Blind Box Series 01">
+                <div class="product-details">
+                    <img src="image/green.png"> 
+                    <a style="display: inline;"> Order Completed</a>
+                    <p></p>
+                    <h2 style="display: inline;">jelly</h2>
+                    <p style="display: inline;">Mega Space Molly 100% Blind Box Series 01</p>
+                </div>
+            </section>
+        </main>
+        <script src="scripts.js"></script>
+    </body>
+</html>
