@@ -1,7 +1,14 @@
 <?php
+session_start();
 include 'db_connect.php';
 
-// ตรวจสอบว่า product_id และ quantity ถูกส่งมาหรือไม่
+// ตรวจสอบการล็อกอิน
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: login.php");
+    exit(); // ใช้ exit() หลังจาก header() เพื่อหยุดการทำงานของสคริปต์
+}
+
+// รับค่า product_id และ quantity จาก GET
 $product_id = isset($_GET['product_id']) ? (int)$_GET['product_id'] : 0;
 $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1; // ค่าเริ่มต้นเป็น 1 หากไม่ได้ส่ง
 
@@ -21,8 +28,8 @@ if (!$product) {
     die("Product not found.");
 }
 
-// ดึงข้อมูลผู้ใช้
-$customer_id = 1; // เปลี่ยนเป็น ID ของลูกค้าที่ต้องการ
+// ดึงข้อมูลผู้ใช้จากเซสชัน
+$customer_id = $_SESSION['customer_id'];
 $customer_sql = "SELECT * FROM usercustomer WHERE CustomerID = ?";
 $stmt = $conn->prepare($customer_sql);
 $stmt->bind_param("i", $customer_id);
@@ -30,10 +37,14 @@ $stmt->execute();
 $customer_result = $stmt->get_result();
 $customer = $customer_result->fetch_assoc();
 
+if (!$customer) {
+    die("Customer not found.");
+}
 
+// ปิดการเชื่อมต่อ
+$stmt->close();
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -254,7 +265,7 @@ $conn->close();
             <div class="shop-name">Second-Hand Figure Shop</div>
         </div>
         <div class="header-bottom">
-            <a href="Home.html" class="home-icon"> </a>
+            <a href="Home.php" class="home-icon"> </a>
             <div class="icon-container">
                 <a href="#" class="user-icon">
                     <img src="image/people.png" alt="User">
@@ -330,7 +341,7 @@ $conn->close();
             </div>
 
             <!-- Order Products Button -->
-            <a href="OrderComplete.html" class="order-button">Order Products</a>
+          <a href="" class="order-button">Order Products</a>
         </div>
     </div>
 </body>

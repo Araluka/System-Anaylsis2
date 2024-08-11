@@ -73,7 +73,7 @@ $result = $conn->query($sql);
             <div class="shop-name">Second-Hand Figure Shop</div>
         </div>
         <div class="header-bottom">
-            <a href="Home.html" class="home-icon"> </a>
+            <a href="Home.php" class="home-icon"> </a>
             <div class="icon-container">
                 <a href="#" class="user-icon">
                     <img src="image/people.png" alt="User"> <!-- เปลี่ยน URL ตามที่คุณมี -->

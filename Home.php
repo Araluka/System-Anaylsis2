@@ -1,16 +1,25 @@
 <?php
+session_start();
 include 'db_connect.php';
 
-// คำสั่ง SQL สำหรับดึงข้อมูลสินค้าสุ่ม 4 รายการ
-$sql = "SELECT ProductID, Name, Image FROM product ORDER BY RAND() LIMIT 4";
-$result = $conn->query($sql);
+// เอาการตรวจสอบเซสชันออก
+// รับรหัสลูกค้าจากเซสชัน (เอาออก)
+// $customer_id = $_SESSION['customer_id'];
+
+// ดึงข้อมูลสินค้าสุ่ม 4 รายการ
+$product_sql = "SELECT ProductID, Name, Image FROM product ORDER BY RAND() LIMIT 4";
+$product_result = $conn->query($product_sql);
 
 // ตรวจสอบว่ามีข้อมูลสินค้าหรือไม่
-if ($result->num_rows > 0) {
-    $products = $result->fetch_all(MYSQLI_ASSOC);
+if ($product_result->num_rows > 0) {
+    $products = $product_result->fetch_all(MYSQLI_ASSOC);
 } else {
     $products = []; // หากไม่มีข้อมูล ให้ $products เป็น array ว่าง
 }
+
+// ปิดการเชื่อมต่อฐานข้อมูล
+$product_result->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="th">
@@ -74,7 +83,7 @@ if ($result->num_rows > 0) {
             <div class="shop-name">Second-Hand Figure Shop</div>
         </div>
         <div class="header-bottom">
-            <a href="Home.html" class="home-icon"></a>
+            <a href="Home.php" class="home-icon"></a>
             <div class="icon-container">
                 <a href="#" class="user-icon">
                     <img src="image/people.png" alt="User">

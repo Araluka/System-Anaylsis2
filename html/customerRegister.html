@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="../css/stylesRegis.css"> <!-- Assuming you have a CSS file for styling -->
+</head>
+<body>
+    <div class="registration-form">
+        <h2>Customer Registration</h2>
+        <form action="/register" method="post">
+            <!-- Header -->
+            <div class="header">
+                <p>Customer Details:</p>
+            </div>
+            <!-- First Name and Last Name -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="last_name" required>
+                </div>
+            </div>
+
+            <!-- Email and Password -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+            </div>
+
+            <!-- Phone Number, Birth Date, and Sex -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone-number">Phone Number *</label>
+                    <input type="tel" id="phone-number" name="phone_number">
+                </div>
+                <div class="form-group">
+                    <label for="birth-date">Birth Date</label>
+                    <input type="date" id="birth-date" name="birth_date">
+                </div>
+                <div class="form-group">
+                    <label for="sex">Sex</label>
+                    <select id="sex" name="sex">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Address, City, Province, and Zip Code -->
+            <div class="address-row">
+                <label for="address">Address *</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city">
+                </div>
+                <div class="form-group">
+                    <label for="province">Province</label>
+                    <input type="text" id="province" name="province">
+                </div>
+                <div class="form-group">
+                    <label for="zip-code">Zip Code</label>
+                    <input type="text" id="zip-code" name="zip_code">
+                </div>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="social-buttons">
+                <a href="#" class="social-button google-button">
+                    <img src="../image/google-icon.png" alt="Google" class="social-icon">
+                    <span class="button-text">Google</span>
+                </a>
+                <a href="#" class="social-button Facebook-button">
+                    <img src="../image/Facebook-icon.png" alt="Facebook" class="social-icon">
+                    <span class="button-text">Facebook</span>
+                </a>
+            </div>
+            
+            <!-- Lower -->
+             <div class="Lower">
+                <p>By signing up, you agree to our Terms of Serice and Privacy Policy</p>
+             </div>
+
+            <!-- Register Button -->
+            <button type="submit" class="register-button">Register</button>
+        </form>
+    </div>
+</body>
+</html>
