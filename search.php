@@ -1,4 +1,5 @@
 <?php
+include 'auth.php';
 include 'db_connect.php';
 
 $search_query = "";
@@ -10,7 +11,6 @@ if (isset($_POST['search'])) {
 $sql = "SELECT ProductID, Name, Description, Price, StockQuantity, Image FROM product WHERE Name LIKE '%$search_query%' OR Description LIKE '%$search_query%'";
 $result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -21,6 +21,7 @@ $result = $conn->query($sql);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/loadHeader.js" defer></script>
     <style>
         .promo-box {
             background-color: #F6F6F6;
@@ -68,30 +69,7 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-<div class="header-container">
-        <div class="header-top">
-            <div class="shop-name">Second-Hand Figure Shop</div>
-        </div>
-        <div class="header-bottom">
-            <a href="Home.php" class="home-icon"> </a>
-            <div class="icon-container">
-                <a href="#" class="user-icon">
-                    <img src="image/people.png" alt="User"> <!-- เปลี่ยน URL ตามที่คุณมี -->
-                </a>
-                <a href="#" class="cart-icon">
-                    <img src="image/cart.png" alt="Cart"> <!-- เปลี่ยน URL ตามที่คุณมี -->
-                </a>
-            </div>
-            <div class="search-bar">
-                <form action="search.php" method="POST">
-                    <input type="text" name="search" placeholder="ค้นหาสินค้า...">
-                    <button type="submit" class="search-button">
-                        <img src="image/search.png" alt="Search">
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>    
+<div id="header-nav-container"></div> 
     <div class="main-content">
     <h1>Search</h1>
     <div class="promo-box">

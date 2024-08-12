@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'auth.php';
 include 'db_connect.php';
 
 // ตรวจสอบการล็อกอิน
@@ -15,6 +15,9 @@ $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1; // ค่า�
 if ($product_id <= 0) {
     die("Invalid product ID.");
 }
+
+// รับค่า payment_method จาก POST (หากมีการส่ง POST)
+$payment_method = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
 
 // ดึงข้อมูลผลิตภัณฑ์
 $product_sql = "SELECT * FROM product WHERE ProductID = ?";
@@ -41,7 +44,23 @@ if (!$customer) {
     die("Customer not found.");
 }
 
-// ปิดการเชื่อมต่อ
+// หากมีการส่ง POST, บันทึกข้อมูลการสั่งซื้อ
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $order_sql = "INSERT INTO orders (CustomerID, ProductID, Quantity, PaymentMethod) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($order_sql);
+    $stmt->bind_param("iiis", $customer_id, $product_id, $quantity, $payment_method);
+    $stmt->execute();
+    
+    // ปิดการเชื่อมต่อ
+    $stmt->close();
+    $conn->close();
+    
+    // ยืนยันการสั่งซื้อ
+    echo "Order placed successfully!";
+    exit();
+}
+
+// ปิดการเชื่อมต่อก่อนเริ่มการแสดงผล HTML
 $stmt->close();
 $conn->close();
 ?>
@@ -55,6 +74,7 @@ $conn->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/order.js"></script>
     <style>
         .main-content {
             display: flex;
@@ -257,7 +277,15 @@ $conn->close();
             align-items: center;
             justify-content: center;
         }
-    </style>
+                .shipping-info .address-line {
+            display: flex; /* Arrange elements in a row */
+            gap: 10px; /* Space between elements */
+        }
+
+        .shipping-info p {
+            margin: 0; /* Remove default margin */
+        }   
+        </style>
 </head>
 <body>
     <div class="header-container">
@@ -321,17 +349,28 @@ $conn->close();
                     </div>
                     
                     <!-- Payment Buttons -->
-                    <button id="credit-debit-card">Credit/Debit Card</button>
-                    <button id="cash-on-delivery">Cash on Delivery</button>
+                    <form id="payment-form" action="Order.php" method="POST">
+                        <!-- Payment Buttons -->
+                        <button type="button" id="credit-debit-card" onclick="setPaymentMethod('Credit/Debit Card', this)">Credit/Debit Card</button>
+                        <button type="button" id="cash-on-delivery" onclick="setPaymentMethod('Cash on Delivery', this)">Cash on Delivery</button>
+                        <input type="hidden" name="payment_method" id="payment-method">
+                        <a href="#" id="order-button" class="order-button">Order Products</a>
+                    </form>
+
+                    
                 </div>
 
                 <!-- Shipping Address -->
                 <div class="shipping-info">
                     <h3>Shipping Address</h3>
                     <p><?php echo htmlspecialchars($customer['Address']); ?></p>
+                    <div class="address-line">
+                    <p><?php echo htmlspecialchars($customer['City']); ?></p>
+                    <p><?php echo htmlspecialchars($customer['Province']); ?></p>
+                    <p><?php echo htmlspecialchars($customer['Zip Code']); ?></p>
+                    </div>
                     <p><?php echo htmlspecialchars($customer['Phone']); ?></p>
                 </div>
-
                 <!-- Order Summary -->
                 <div class="order-summary">
                     <div>Total Order    : ฿<?php echo number_format($product['Price'] * $quantity, 2); ?></div>
@@ -339,9 +378,6 @@ $conn->close();
                     <div>Total Payment  : ฿<?php echo number_format(($product['Price'] * $quantity) + 39.00, 2); ?></div>
                 </div>
             </div>
-
-            <!-- Order Products Button -->
-          <a href="" class="order-button">Order Products</a>
         </div>
     </div>
 </body>

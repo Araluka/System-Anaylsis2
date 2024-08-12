@@ -1,4 +1,5 @@
 <?php
+include 'auth.php';
 include 'db_connect.php';
 
 // ตรวจสอบว่ามีการส่ง ID มาใน URL หรือไม่
@@ -22,7 +23,6 @@ if (isset($_GET['id'])) {
     die("Invalid product ID.");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -33,6 +33,7 @@ if (isset($_GET['id'])) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/loadHeader.js" defer></script>
     <style>
 .promo-box {
             background-color: #F6F6F6;
@@ -183,65 +184,7 @@ if (isset($_GET['id'])) {
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <div class="header-top">
-            <div class="shop-name">Second-Hand Figure Shop</div>
-        </div>
-        <div class="header-bottom">
-            <a href="Home.php" class="home-icon"> </a>
-            <div class="icon-container">
-                <a href="#" class="user-icon">
-                    <img src="image/people.png" alt="User"> <!-- เปลี่ยน URL ตามที่คุณมี -->
-                </a>
-                <a href="#" class="cart-icon">
-                    <img src="image/cart.png" alt="Cart"> <!-- เปลี่ยน URL ตามที่คุณมี -->
-                </a>
-            </div>
-            <div class="search-bar">
-                <form action="search.php" method="POST">
-                    <input type="text" name="search" placeholder="ค้นหาสินค้า...">
-                    <button type="submit" class="search-button">
-                        <img src="image/search.png" alt="Search">
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="nav">
-        <div class="nav-item">
-            <a href="#">Category</a>
-            <div class="dropdown">
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a href="#">All Product</a>
-            <div class="dropdown">
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a href="#">Member</a>
-            <div class="dropdown">
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
-            </div>
-        </div>
-        <div class="nav-item">
-            <a href="#">Support</a>
-            <div class="dropdown">
-                <a href="#">Option 1</a>
-                <a href="#">Option 2</a>
-                <a href="#">Option 3</a>
-            </div>
-        </div>
-    </div>
-    </div>
+    <div id="header-nav-container"></div> 
     <div class="main-content">
     <div class="promo-box">
         <section class="product">

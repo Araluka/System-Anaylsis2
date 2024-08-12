@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "ProG13";
-$password = "123123";
+$username = "root";
+$password = "28112003";
 $dbname = "prog13";
 
 // สร้างการเชื่อมต่อ

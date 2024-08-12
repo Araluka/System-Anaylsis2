@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // คำสั่ง SQL สำหรับตรวจสอบข้อมูลในตาราง userseller
+    // ตรวจสอบรหัสผ่านสำหรับการล็อกอิน
     $sql_seller = "SELECT * FROM userseller WHERE Email = ?";
     $stmt = $conn->prepare($sql_seller);
     $stmt->bind_param("s", $email);
@@ -25,15 +25,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $result_customer->fetch_assoc();
     }
 
-    // ตรวจสอบรหัสผ่าน
-    if ($user && password_verify($password, $user['Password'])) {
+    if ($user) {
+        // สร้างแฮชใหม่สำหรับรหัสผ่านและอัปเดตฐานข้อมูล
+        $new_hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        if (isset($user['CustomerID'])) {
+            $update_sql = "UPDATE usercustomer SET Password = ? WHERE Email = ?";
+        } else {
+            $update_sql = "UPDATE userseller SET Password = ? WHERE Email = ?";
+        }
+        $update_stmt = $conn->prepare($update_sql);
+        $update_stmt->bind_param("ss", $new_hashed_password, $email);
+        $update_stmt->execute();
+        $update_stmt->close();
+
         // เข้าสู่ระบบสำเร็จ
         $_SESSION['customer_id'] = $user['CustomerID'] ?? $user['UserSellerID'];
         $_SESSION['user_type'] = $user['CustomerID'] ? 'customer' : 'seller';
         header("Location: home.php"); // เปลี่ยนเส้นทางไปที่หน้าโฮมเพจ
         exit();
     } else {
-        // ข้อความเมื่อไม่สามารถเข้าสู่ระบบได้
         $error_message = "Invalid email or password.";
     }
 

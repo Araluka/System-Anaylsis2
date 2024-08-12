@@ -1,7 +1,4 @@
 <?php
-// เริ่ม session
-session_start();
-
 // เชื่อมต่อกับฐานข้อมูล
 include 'db_connect.php';
 
@@ -37,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
-
+<?php include 'auth.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="file" name="image" accept="image/*" onchange="previewImage(event)">
                         <p>Add photos</p>
                     </div>
-                    <p class="photo-info">Photos: 0/10 Choose your listing's main photo first.</p>
+                    <p class="photo-info">Photos: Choose your listing's main photo first.</p>
                 </div>
                 <div class="address-row">
                     <input type="text" name="name" placeholder="Name" required>
