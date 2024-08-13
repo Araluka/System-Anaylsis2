@@ -33,7 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param('ssssssssssss', $first_name, $last_name, $email, $hashed_password, $phone_number, $birth_date, $sex, $address, $city, $province, $zip_code, $image);
     
     if ($stmt->execute()) {
-        echo "Registration successful!";
+        echo "<div class='overlay' onclick='closeMessageBox()'>
+                    <div class='message-box'>
+                        <p>Registration successful!</p>
+                    </div>
+                  </div>";
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -50,7 +54,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Page</title>
-    <link rel="stylesheet" href="css/stylesRegis.css"> <!-- Assuming you have a CSS file for styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/regisCustomer.css"> 
+    <script src="js/overlay.js" defer></script>
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .message-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        .message-box p {
+            font-size: 18px;
+            color: #000;
+        }
+    </style>
 </head>
 <body>
     <div class="registration-form">

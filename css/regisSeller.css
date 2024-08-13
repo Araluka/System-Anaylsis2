@@ -1,0 +1,65 @@
+
+.container {
+    width: 60%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    color: #000;
+    background-color: #ffccff;
+    padding: 10px 0;
+    margin: 0 -20px 20px -20px;
+}
+label {
+    display: block;
+    margin: 10px 0 5px 0;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* เพิ่มช่องว่างระหว่างช่องพิมพ์ */
+}
+.row .column {
+    flex: 1;
+}
+.row .column.half {
+    flex: 1;
+    min-width: calc(50% - 15px); /* ลดขนาดช่องพิมพ์ให้พอดีกับพื้นที่ */
+}
+.row .column.third {
+    flex: 1;
+    min-width: calc(33.33% - 10px);
+}
+.row .column.quarter {
+    flex: 1;
+    min-width: calc(25% - 10px);
+}
+.terms {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+.terms input[type="checkbox"] {
+    margin-right: 10px;
+}
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ffccff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}

@@ -46,7 +46,7 @@ if (!$customer) {
 
 // หากมีการส่ง POST, บันทึกข้อมูลการสั่งซื้อ
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $order_sql = "INSERT INTO orders (CustomerID, ProductID, Quantity, PaymentMethod) VALUES (?, ?, ?, ?)";
+    $order_sql = "INSERT INTO orders (CustomerID, ProductID, Quantity, payment_method) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($order_sql);
     $stmt->bind_param("iiis", $customer_id, $product_id, $quantity, $payment_method);
     $stmt->execute();
@@ -349,11 +349,14 @@ $conn->close();
                     </div>
                     
                     <!-- Payment Buttons -->
-                    <form id="payment-form" action="Order.php" method="POST">
+                    <form id="payment-form" action="process_order.php" method="POST">
                         <!-- Payment Buttons -->
                         <button type="button" id="credit-debit-card" onclick="setPaymentMethod('Credit/Debit Card', this)">Credit/Debit Card</button>
                         <button type="button" id="cash-on-delivery" onclick="setPaymentMethod('Cash on Delivery', this)">Cash on Delivery</button>
                         <input type="hidden" name="payment_method" id="payment-method">
+                        <!-- Hidden fields for product ID and quantity -->
+                        <input type="hidden" name="product_id" id="product-id" value="<?php echo htmlspecialchars($product_id); ?>">
+                        <input type="hidden" name="quantity" id="quantity" value="<?php echo htmlspecialchars($quantity); ?>">
                         <a href="#" id="order-button" class="order-button">Order Products</a>
                     </form>
 

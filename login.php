@@ -62,30 +62,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <div class="header-container">
-        <div class="header-top">
-            <div class="shop-name">Second-Hand Figure Shop</div>
+<div class="header-container">
+    <div class="header-top">
+        <div class="shop-name">Second-Hand Figure Shop</div>
+    </div>
+    <div class="header-bottom">
+        <a href="Home.php" class="home-icon"></a>
+        <div class="icon-container">
+            <a href="#" class="user-icon">
+                <img src="image/people.png" alt="User">
+            </a>
+            <a href="#" class="cart-icon">
+                <img src="image/cart.png" alt="Cart">
+            </a>
         </div>
-        <div class="header-bottom">
-            <a href="Home.php" class="home-icon"> </a>
-            <div class="icon-container">
-                <a href="#" class="user-icon">
-                    <img src="image/people.png" alt="User">
-                </a>
-                <a href="#" class="cart-icon">
-                    <img src="image/cart.png" alt="Cart">
-                </a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="ค้นหาสินค้า...">
-                <button class="search-button">
+        <div class="search-bar">
+            <form action="search.php" method="POST">
+                <input type="text" name="search" placeholder="ค้นหาสินค้า...">
+                <button type="submit" class="search-button">
                     <img src="image/search.png" alt="Search">
                 </button>
-            </div>
+            </form>
         </div>
     </div>
+</div>
     <div class="login-container">
         <h2>Log In</h2>
         <?php if (isset($error_message)): ?>

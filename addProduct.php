@@ -20,44 +20,78 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // เพิ่มข้อมูลสินค้าเข้าในตาราง product
     $sql = "INSERT INTO product (Name, Description, Price, StockQuantity, image) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stock_quantity = 1; // กำหนดค่าปริมาณในสต็อกเป็น 1 สำหรับสินค้าใหม่
-    $stmt->bind_param("ssdss", $name, $description, $price, $stock_quantity, $imageData);
 
-    if ($stmt->execute()) {
-        echo "Product added successfully!";
+    if ($stmt) {
+        $stock_quantity = 1; // กำหนดค่าปริมาณในสต็อกเป็น 1 สำหรับสินค้าใหม่
+        $stmt->bind_param("ssdss", $name, $description, $price, $stock_quantity, $imageData);
+
+        if ($stmt->execute()) {
+            echo "<div class='overlay' onclick='closeMessageBox()'>
+                    <div class='message-box'>
+                        <p>Product added successfully!</p>
+                    </div>
+                  </div>";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        // ปิดการเชื่อมต่อ
+        $stmt->close();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error preparing statement: " . $conn->error;
     }
 
-    // ปิดการเชื่อมต่อ
-    $stmt->close();
+    // ปิดการเชื่อมต่อหลังจากดำเนินการทั้งหมดเสร็จสิ้น
     $conn->close();
 }
 ?>
-<?php include 'auth.php'; ?>
+
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sell Page</title>
+    <title>Add Product</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/stylesSell.css">
     <style>
-    
-       
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .message-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 40px;
+            text-align: center;
+        }
+
+        .message-box p {
+            font-size: 18px;
+            color: #000;
+        }
     </style>
 </head>
 <body>
     
     <div class="container">
         <div class="header">
-            <h1>Sell</h1>
+            <h1>Add Product</h1>
         </div>
         <div class="form-container">
-            <form action="Sell.php" method="post" enctype="multipart/form-data">
+            <form action="addProduct.php" method="post" enctype="multipart/form-data">
                 <div class="photo-upload">
                     <div class="photo-placeholder">
                         <img src="image/image01.png" alt="Add photos" id="photo-preview">
@@ -73,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="text" name="price" placeholder="Price" required>
                 </div>
                 <div class="address-row">
-                    <input type="text" name="category" placeholder="Category" required>
+                    <input type="text" name="category" placeholder="Category">
                 </div>
                 <div class="address-row">
                     <select name="condition" required>
@@ -99,9 +133,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             reader.onload = function() {
                 const output = document.getElementById('photo-preview');
                 output.src = reader.result;
+                output.style.display = 'block';
             };
             reader.readAsDataURL(event.target.files[0]);
         }
-    </script>
+
+        function closeMessageBox() {
+            // ปิดกล่องข้อความ
+            document.querySelector('.overlay').style.display = 'none';
+            // รีโหลดหน้าปัจจุบัน
+            window.location.href = window.location.href;
+        }
+        </script>
 </body>
 </html>
+

@@ -1,8 +1,6 @@
 <?php
-// เริ่มต้นเซสชัน
-session_start();
-
 // เชื่อมต่อฐานข้อมูล
+include 'auth.php'; 
 include 'db_connect.php';
 
 // ตรวจสอบการส่งข้อมูลจากฟอร์ม
@@ -48,20 +46,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // ดำเนินการคำสั่ง SQL
     if ($stmt->execute()) {
-        echo "Registration successful!";
-        // เปลี่ยนเส้นทางไปที่หน้า home.php
-        header("Location: home.php");
-        exit();
+        echo "<div class='overlay' onclick='closeMessageBox()'>
+                    <div class='message-box'>
+                        <p>Registration successful!</p>
+                    </div>
+                  </div>";     
     } else {
         die("Error executing the statement: " . $stmt->error);
     }
-    
+        // header("Location: home.php");
+        //     exit();
     // ปิดคำสั่ง SQL และการเชื่อมต่อฐานข้อมูล
     $stmt->close();
     $conn->close();
 }
 ?>
-<?php include 'auth.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,83 +69,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Registration</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Antic&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/regisSeller.css">
+    <script src="js/loadHeader.js" defer></script>
     <style>
-        body {
-            font-family: 'Antic', sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f7f7f7;
-        }
-        .container {
-            width: 60%;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-family: 'Anton', sans-serif;
-            text-align: center;
-            color: #000;
-            background-color: #ffccff;
-            padding: 10px 0;
-            margin: 0 -20px 20px -20px;
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px 0;
-        }
-        input[type="text"], input[type="email"], input[type="password"], input[type="url"] {
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 8px;
-            margin: 5px 0 10px 0;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-        .row {
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
-            justify-content: space-between;
-            gap: 15px; /* เพิ่มช่องว่างระหว่างช่องพิมพ์ */
-        }
-        .row .column {
-            flex: 1;
-        }
-        .row .column.half {
-            flex: 1;
-            min-width: calc(50% - 15px); /* ลดขนาดช่องพิมพ์ให้พอดีกับพื้นที่ */
-        }
-        .row .column.third {
-            flex: 1;
-            min-width: calc(33.33% - 10px);
-        }
-        .row .column.quarter {
-            flex: 1;
-            min-width: calc(25% - 10px);
-        }
-        .terms {
-            display: flex;
+            justify-content: center;
             align-items: center;
-            margin: 20px 0;
+            z-index: 1000;
         }
-        .terms input[type="checkbox"] {
-            margin-right: 10px;
+
+        .message-box {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px 40px;
+            text-align: center;
         }
-        .register-btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #ffccff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+
+        .message-box p {
+            font-size: 18px;
+            color: #000;
         }
     </style>
 </head>
 <body>
+<!-- <div id="header-nav-container"></div>  -->
     <div class="container">
         <h1>Seller Registration</h1>
-        
         <form action="SellerRegister.php" method="post" enctype="multipart/form-data">
             <h2>Seller Information</h2>
             <div class="row">
@@ -251,5 +208,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="register-btn">Register</button>
         </form>
     </div>
+    <script src="js/overlay.js" defer></script>
 </body>
 </html>

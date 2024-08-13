@@ -1,4 +1,4 @@
-// ฟังก์ชันสำหรับตั้งค่าวิธีการชำระเงิน
+// ฟังก์ชันสำหรับตั้งค่าวิธีการชำระเงินและเปลี่ยนสีของปุ่ม
 function setPaymentMethod(method, button) {
     // ตั้งค่าวิธีการชำระเงิน
     document.getElementById('payment-method').value = method;
@@ -9,49 +9,45 @@ function setPaymentMethod(method, button) {
     button.style.backgroundColor = '#cf5376'; // ตั้งค่าสีของปุ่มที่กด
 }
 
-// รอให้ DOM โหลดเสร็จ
 document.addEventListener('DOMContentLoaded', function() {
-    // การจัดการการคลิกที่ปุ่ม "Order Products"
     document.getElementById('order-button').addEventListener('click', function(e) {
-        e.preventDefault(); // ป้องกันการเปลี่ยนเส้นทางไปยัง URL อื่น
-
+        e.preventDefault();
+        
+        // ตรวจสอบวิธีการชำระเงิน
         var paymentMethod = document.querySelector('input[name="payment_method"]').value;
         if (!paymentMethod) {
             alert('กรุณาเลือกวิธีการชำระเงิน.');
             return;
         }
 
-        // สร้างฟอร์มใหม่
+        // สร้างฟอร์มใหม่เพื่อส่งข้อมูล
         var form = document.createElement('form');
         form.method = 'POST';
-        form.action = 'process_order.php'; // กำหนดที่อยู่ของฟอร์ม
+        form.action = 'process_order.php';
 
-        // เพิ่มข้อมูลฟอร์ม
+        // เพิ่มฟิลด์ product_id
         var product_id = document.createElement('input');
         product_id.type = 'hidden';
         product_id.name = 'product_id';
-        product_id.value = '<?php echo $product_id; ?>'; // เปลี่ยนเป็นค่าจริงจาก PHP
+        product_id.value = document.getElementById('product-id').value; // ใช้ค่า product_id ที่เก็บในฟิลด์ hidden
         form.appendChild(product_id);
 
+        // เพิ่มฟิลด์ quantity
         var quantity = document.createElement('input');
         quantity.type = 'hidden';
         quantity.name = 'quantity';
-        quantity.value = '<?php echo $quantity; ?>'; // เปลี่ยนเป็นค่าจริงจาก PHP
+        quantity.value = document.getElementById('quantity').value; // ใช้ค่า quantity ที่เก็บในฟิลด์ hidden
         form.appendChild(quantity);
 
+        // เพิ่มฟิลด์ payment_method
         var payment_method = document.createElement('input');
         payment_method.type = 'hidden';
         payment_method.name = 'payment_method';
-        payment_method.value = paymentMethod;
+        payment_method.value = payment_method;
         form.appendChild(payment_method);
 
-        console.log('<?php echo $product_id; ?>'); // ตรวจสอบค่าของ product_id
-        console.log('<?php echo $quantity; ?>'); // ตรวจสอบค่าของ quantity
-
-        // เพิ่มฟอร์มไปยังเอกสารและส่งฟอร์ม
+        // ส่งฟอร์ม
         document.body.appendChild(form);
-        form.submit(); // ส่งฟอร์ม
-
-
+        form.submit();
     });
 });

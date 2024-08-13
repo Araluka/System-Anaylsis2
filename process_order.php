@@ -13,6 +13,7 @@ $product_id = isset($_POST['product_id']) ? (int)$_POST['product_id'] : 0;
 $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1;
 $payment_method = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
 
+// ตรวจสอบค่า product_id
 if ($product_id <= 0) {
     die("Invalid product ID.");
 }
@@ -50,15 +51,16 @@ $order_date = date('Y-m-d H:i:s');
 $order_status = 'Pending';
 
 // บันทึกข้อมูลการสั่งซื้อ
-$order_sql = "INSERT INTO orderproduct (OrderID, OrderDate, Count, TotalAmount, ShippingAddress, OrderStatus) VALUES (?, ?, ?, ?, ?, ?)";
+$order_sql = "INSERT INTO orderproduct (OrderDate, Count, TotalAmount, ShippingAddress, OrderStatus, payment_method) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($order_sql);
-$stmt->bind_param("isisss", $order_id, $order_date, $quantity, $total_amount, $customer['Address'], $order_status);
+$stmt->bind_param("sissss", $order_date, $quantity, $total_amount, $customer['Address'], $order_status, $payment_method);
 $stmt->execute();
 
 // ปิดการเชื่อมต่อ
 $stmt->close();
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -74,7 +76,8 @@ $conn->close();
             background-color: #F6F6F6;
             border-radius: 12px;
             padding: 40px;
-            width: 80%;
+            width: 60%;
+            height: 60%;
             text-align: center;
             margin-bottom: 40px;
         }
@@ -100,8 +103,8 @@ $conn->close();
         }
 
         .product-gallery img {
-            width: 350px;
-            height: 350px;
+            width: 200px;
+            height: 200px;
             object-fit: cover;
             border-radius: 12px;
         }
@@ -128,28 +131,30 @@ $conn->close();
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <div class="header-top">
-            <div class="shop-name">Second-Hand Figure Shop</div>
+<div class="header-container">
+    <div class="header-top">
+        <div class="shop-name">Second-Hand Figure Shop</div>
+    </div>
+    <div class="header-bottom">
+        <a href="Home.php" class="home-icon"></a>
+        <div class="icon-container">
+            <a href="#" class="user-icon">
+                <img src="image/people.png" alt="User">
+            </a>
+            <a href="#" class="cart-icon">
+                <img src="image/cart.png" alt="Cart">
+            </a>
         </div>
-        <div class="header-bottom">
-            <div class="home-icon"></div>
-            <div class="icon-container">
-                <a href="#" class="user-icon">
-                    <img src="image/people.png" alt="User">
-                </a>
-                <a href="#" class="cart-icon">
-                    <img src="image/cart.png" alt="Cart">
-                </a>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="ค้นหาสินค้า...">
-                <button class="search-button">
+        <div class="search-bar">
+            <form action="search.php" method="POST">
+                <input type="text" name="search" placeholder="ค้นหาสินค้า...">
+                <button type="submit" class="search-button">
                     <img src="image/search.png" alt="Search">
                 </button>
-            </div>
+            </form>
         </div>
     </div>
+</div>
     <div class="nav">
         <div class="nav-item">
             <a href="#"><h1>คำสั่งซื้อของคุณ<h1></a>
