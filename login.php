@@ -61,11 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Acme&family=Anton&family=Bungee+Shade&family=Bungee+Spice&family=Concert+One&family=Kalam:wght@300;400;700&family=Lilita+One&family=Luckiest+Guy&family=Sriracha&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- <link rel="stylesheet" href="css/styles.css"> -->
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-<div class="header-container">
+<!-- <div class="header-container">
     <div class="header-top">
         <div class="shop-name">Second-Hand Figure Shop</div>
     </div>
@@ -88,16 +88,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
     </div>
-</div>
-    <div class="login-container">
-        <h2>Log In</h2>
+</div> -->
+
+    <div class="header-top">
+        <div class="shop-name">Second-Hand Figure Shop</div>
+    </div>
+    <div class="registration-form">
+
         <?php if (isset($error_message)): ?>
             <p class="error-message"><?php echo htmlspecialchars($error_message); ?></p>
         <?php endif; ?>
         <form action="login.php" method="post">
-            <input type="text" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="submit" value="Log In">
+        <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" placeholder="Password" required>
+                </div>
+                
+        </div>  
+        <button type="submit" class="register-button">Log in</button>   
         </form>
     </div>
 </body>

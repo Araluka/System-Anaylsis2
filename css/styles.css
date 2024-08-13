@@ -47,6 +47,63 @@ body {
     right: 70px; /* ให้ไปอยู่ถัดจากไอคอนบ้าน */
 }
 
+.header-bottom .icon-container-item {
+    position: relative;
+}
+
+.header-bottom .icon-container-item .dropdown {
+    display: none; /* Hide dropdown by default */
+    position: absolute;
+    top: 100%; /* Position below the icon */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px; /* Adjust padding */
+    border-radius: 8px; /* Rounded corners */
+    min-width: 150px; /* Minimum width for dropdown */
+    z-index: 1000; /* Ensure dropdown is above other content */
+}
+
+.header-bottom .icon-container-item:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.header-bottom .icon-container-item .dropdown a {
+    display: block; /* Ensure each option is on a new line */
+    padding: 10px; /* Adjust padding for dropdown items */
+    color: black; /* Text color */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.header-bottom .icon-container-item .dropdown a:hover {
+    background-color: #f0f0f0; /* Background color on hover */
+}
+
+
+
+.nav .nav-item .dropdown a {
+    display: block;
+    padding: 10px 20px; /* เพิ่ม padding */
+    color: #333;
+    text-decoration: none;
+    font-size: 20px; /* ขนาดตัวอักษรใหญ่ขึ้น */
+}
+
+.nav .nav-item .dropdown a:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .header-bottom .icon-container a {
     display: flex;
     align-items: right;
@@ -58,30 +115,34 @@ body {
 }
 .header-bottom .search-bar {
     display: flex;
-    align-items: center;
+    align-items: center; /* Aligns items vertically centered */
     width: 100%;
-    justify-content: center; /* จัดกลางในคอนเทนเนอร์ */
+    justify-content: center; /* Centers the search bar within its container */
 }
 
 .header-bottom input[type="text"] {
-    padding: 15px; /* เพิ่ม padding */
-    border: 2px solid #ddd; /* เพิ่มความหนาของเส้นขอบ */
-    border-radius: 50px; /* เพิ่มความโค้งมนของมุม */
-    width: 500px; /* ขยายขนาดช่องค้นหา */
+    padding: 15px; /* Add padding */
+    border: 2px solid #ddd; /* Increase border thickness */
+    border-radius: 50px; /* Round the corners */
+    width: 500px; /* Increase the width of the search input */
+    margin-right: 10px; /* Space between input and button */
 }
 
 .header-bottom .search-button {
-    background-color: transparent; /* ไม่ต้องการพื้นหลัง */
+    
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    background-color: transparent; /* No background */
     border: none;
     cursor: pointer;
-    padding: 10; /* ไม่มี padding */
- /* ใช้ flex เพื่อจัดตำแหน่ง */
-   /* จัดกลางแนวตั้ง */
+    padding: 10px; /* Add padding to make the button size match the input */
+    border-radius: 50%; /* Make the button circular */
+    
+  
 }
-
 .header-bottom .search-button img {
-    width: 24px; /* ขนาดของไอคอนค้นหา */
-    height: 24px;
+    width: 30px; /* ขนาดของไอคอนค้นหา */
+    height: 30px;
 }
 .nav {
     display: flex;
@@ -91,7 +152,7 @@ body {
 
 .nav .nav-item {
     position: relative;
-    margin: 0 50px; /* เพิ่มระยะห่างระหว่างเมนู */
+    margin: 0 100px; /* เพิ่มระยะห่างระหว่างเมนู */
 }
 
 .nav .nav-item a {

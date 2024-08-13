@@ -14,7 +14,7 @@ body {
 
 h2 {
     color: #000; /* Black color for text */
-    background-color: #f8d1ff; /* Pink background */
+    background-color: #f4a1b6; /* Pink background */
     padding: 10px;
     text-align: left;
     margin: -20px -20px 20px; /* Extend the background */
@@ -92,7 +92,7 @@ h2 {
 }
 
 .register-button {
-    background-color: #f8d1ff; /* Pink background */
+    background-color: #f4a1b6; /* Pink background */
     color: #000; /* Black text */
     padding: 15px;
     border: none;
